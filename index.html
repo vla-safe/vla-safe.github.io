@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="EgoLifter: Open-world 3D Segmentation for Egocentric Perception">
+  <meta name="keywords"
+    content="Egolifter, 3D Mapping, Open-set, Foundation models, 3D Segmentation, Egocentric Perception, 3D Reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EgoLifter: Open-world 3D Segmentation for Egocentric Perception</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEBZD9Q5QS"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TEBZD9Q5QS');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://egolifter.github.io/">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+
+        <!-- <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Related Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://concept-fusion.github.io">
+              ConceptFusion
+            </a>
+            <a class="navbar-item" href="https://gradslam.github.io">
+              GradSLAM
+            </a>
+            <a class="navbar-item" href="https://sayplan.github.io/">
+              SayPlan
+            </a>
+          </div>
+        </div> -->
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">EgoLifter: Open-world 3D Segmentation for Egocentric Perception</h1>
+            <h2 class="title is-6 publlication-title">ECCV 2024</h2>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                <a href="https://georgegu1997.github.io/"><i>Qiao Gu</i></a> <sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://lvzhaoyang.github.io/"><i>Zhaoyang Lv</i></a> <sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=P9l4zHIAAAAJ&hl=en"><i>Duncan Frost</i></a> <sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=VmHZtsEAAAAJ&hl=en"><i>Simon Green</i></a> <sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://people.csail.mit.edu/jstraub/"><i>Julian Straub</i></a> <sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=h-CpQGgAAAAJ&hl=en"><i>Chris Sweeney</i></a> <sup>2</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>1</sup>University of Toronto,</span>
+              <span class="author-block"><sup>2</sup>Meta Reality Labs</span>
+              <br>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2403.18118.pdf" class="external-link button is-normal">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2403.18118" class="external-link button is-normal">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://youtu.be/dWuZyeiOXyM" class="external-link button is-normal">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/facebookresearch/egolifter" class="external-link button is-normal">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/eccv24-egolifter-teaser-animate-v2-compress.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          <span class="coolname">EgoLifter</span> takes an egocentric video as input and lifts 2D instance segmentation results to 3D by contrastive learning. The results are 3D Gaussian models that can be decomposed into individual object instances by querying or clustering. 
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h3 class="title is-4 has-text-centered">
+          Interactive 3D Segmentation
+        </h3>
+        <!-- <p>
+          <span class="coolname">EgoLifter</span> augments 3D Gaussians with feature vectors and encode object identity using contrastive learning. Individual 3D objects can therefore be extracted by click-query or clustering. 
+        </p> -->
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-3-1" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-3-1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-3-2" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-3-2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-3-3" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-3-3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-3-4" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-3-4.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-2-1" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-2-1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-2-2" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-2-2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-2-3" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-2-3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="interactive-feat-vol-2-4" autoplay controls muted loop playsinline height="55%">
+              <source src="static/videos/interactive-feat-vol-2-4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Explainer Video</h2>
+          <div class="publication-video">
+            <iframe width="100%" height="473" src="https://www.youtube.com/embed/dWuZyeiOXyM?si=14CuGsvIrmxstIFK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              In this paper we present <span class="coolname">EgoLifter</span>, a novel system that can automatically segment scenes captured from egocentric sensors into a complete decomposition of individual 3D objects. The system is specifically designed for egocentric data where scenes contain hundreds of objects captured from natural (non-scanning) motion. <span class="coolname">EgoLifter</span> adopts 3D Gaussians as the underlying representation of 3D scenes and objects and uses segmentation masks from the Segment Anything Model (SAM) as weak supervision to learn flexible and promptable definitions of object instances free of any specific object taxonomy. To handle the challenge of dynamic objects in ego-centric videos, we design a transient prediction module that learns to filter out dynamic objects in the 3D reconstruction. The result is a fully automatic pipeline that is able to reconstruct 3D object instances as collections of 3D Gaussians that collectively compose the entire scene. We created a new benchmark on the Aria Digital Twin dataset that quantitatively demonstrates its state-of-the-art performance in open-world 3D segmentation from natural egocentric input. We run <span class="coolname">EgoLifter</span> on various egocentric activity datasets which shows the promise of the method for 3D egocentric perception at scale.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Approach</h2>
+          <div class="content has-text-justified">
+            <p>
+              <span class="coolname">EgoLifter</span> solves 3D reconstruction and open-world segmentation simultaneously from egocentric videos. <span class="coolname">EgoLifter</span> augments 3D Gaussian Splatting with instance features and lifts open-world 2D segmentation by contrastive learning, where 3D Gaussians belonging to the same objects are learned to have similar features. In this way, <span class="coolname">EgoLifter</span> solves the multi-view mask association problem and establishes a consistent 3D representation that can be decomposed into object instances. 
+            </p>
+            <p>
+              Naive 3D reconstruction from egocentric videos creates a lot of "floaters" in the reconstruction and leads to blurry rendered images and erroneous instance features (bottom right). <span class="coolname">EgoLifter</span> tackles this problem using a transient prediction network, which predicts a probability mask of transient objects in the image and guides the reconstruction process. In this way, <span class="coolname">EgoLifter</span> gets a much cleaner reconstruction of the static background in both RGB and feature space (top right), which in turn leads to better object decomposition of 3D scenes. 
+            </p>
+            <img src="./static/images/pipeline.png" />
+          </div>
+          <br />
+        </div>
+      </div>
+
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Experiments</h2>
+            <p>
+              Egocentric videos capture frequent human-object interaction and thus contain a huge amount of dynamic motion with challenging occlusions. <span class="coolname">EgoLifter</span> is designed to provide useful scene understanding from egocentric data by extracting hundreds of different objects while being robust to sparse and rapid dynamics.
+            </p>
+            <p>
+              To demonstrate this, we compare the following variants in our experiments: 
+            </p>
+            <ul>
+              <li><span class="coolname">EgoLifter</span>: Our proposed full method</li>
+              <li><span class="coolname">EgoLifter</span>-Static: a baseline with the transient prediction network disabled. A vanilla static 3DGS is learned to reconstruct the scene. </li>
+              <li><span class="coolname">EgoLifter</span>-Dynamic: a baseline using a dynamic variant of 3DGS, instead of the transient prediction network to handle the dynamics in the scene. </li>
+              <li><a href="https://arxiv.org/abs/2312.00732">Gaussian Grouping</a>: a concurrent work that also learns instance features in 3DGS. However, Gaussian Grouping uses a video tracker to solve instance identities rather than contrastive learning. </li>
+            </ul>
+            <p>
+              Here are the qualitative results of <span class="coolname">EgoLifter</span> on the <a href="https://www.projectaria.com/datasets/adt/">Aria Digital Twin</a> (ADT) dataset. Quantitative evaluation results and more analysis can be found in the paper. Note that baseline puts ghostly floaters on the region of transient objects, but <span class="coolname">EgoLifter</span> filters them out and gives a cleaner reconstruction of both RGB images and feature maps. 
+            </p>
+            <div class="qual-video-adt">
+              <video poster="" controls muted loop playsinline height="100%" width="100%">
+                <source src="static/videos/compare_3_faster-meal132-seen.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p>
+              Here is the qualitative comparison with Gaussian Grouping. Note that <span class="coolname">EgoLifter</span> has a cleaner feature map probably because our contrastive loss helps learn more cohesive identity features than the classification loss used in Gaussian Grouping. 
+            </p>
+            <div class="qual-video-adt">
+              <video poster="" controls muted loop playsinline height="100%" width="75%">
+                <source src="static/videos/compare_gg_less-meal132-seen.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">More Qualitative Results</h2>
+            <p>
+              Here are more qualitative results of <span class="coolname">EgoLifter</span> on the <a href="https://ego-exo4d-data.org/">Ego-Exo4D</a> dataset and <a href="https://www.projectaria.com/datasets/aea/">Aria Everyday Activities</a> dataset.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered">
+
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
+                <source src="static/videos/compare_path-egoexo-cmu_bike16-trim.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
+                <source src="static/videos/compare_path-sfu_cooking025.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
+              <source src="static/videos/compare_path-aea-loc2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
+                <source src="static/videos/compare_path-aea-loc4.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- <section class="section" id="concurrent work">
+    <div class="container is-max-desktop content">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Concurrent work</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              Given the pace of AI research these days, it is extremely challenging to keep up with all of the work
+              around foundation models and open-set perception. We list below a few key approaches that we have come
+              across after finalizing the ConceptGraphs system. If we may have inadvertently missed out on key
+              concurrent work, please reach out to us over email (or better, open a pull request on <a
+                href="https://github.com/concept-graphs/concept-graphs.github.io">our GitHub page</a>).
+            </p>
+            <p>
+              <a href="https://openreview.net/forum?id=gVBvtRqU1_">OVIR-3D</a> is an open-vocabulary 3D instance-level
+              mapping system that reconstructs an objects from RGB-D images and known poses. Each object is additionally
+              assigned a CLIP embedding for text-query-based retrieval.
+            </p>
+            <p>
+              <a href="https://openmask3d.github.io/">OpenMask3D</a> performs 3D instance segmentation (on pointcloud
+              data) based on open-vocabulary queries (specified as text).
+            </p>
+            <p>
+              <a href="https://openreview.net/forum?id=cjEI5qXoT0">OVSG</a> reconstructs open-vocabulary 3D scene graphs
+              using OVIR-3D and a graph network encoder.
+            </p>
+            <p>
+              <a href="https://sayplan.github.io/">SayPlan</a> demonstrates an efficient planning mechanism using LLMs
+              and 3D Scene Graphs (assumed available).
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section> -->
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{gu2024egolifter,
+  author    = {Gu, Qiao and Lv, Zhaoyang and Frost, Duncan and Green, Simon and Straub, Julian and Sweeney, Chris},
+  title     = {EgoLifter: Open-world 3D Segmentation for Egocentric Perception},
+  journal   = {arXiv preprint arXiv:2403.18118},
+  year      = {2024},
+} </code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="./assets/pdf/_ECCV2024_EgoLifter.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/concept-graphs" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+          <img alt="Creative Commons License" style="border-width:0"
+            src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website adapted from the Nerfies templates, which is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0
+                International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a
+                href="https://github.com/concept-fusion/concept-fusion.github.io">source code</a> of this website,
+              we just ask that you link back to the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies
+                source code</a> in the footer.
+              Please remember to remove the analytics code included in the header of the website which you do not want
+              on your website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
