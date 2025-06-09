@@ -161,18 +161,20 @@
     </div>
   </section>
 
-  <!-- <section class="hero teaser">
-    <div class="container is-max-desktop">
-      <div class="hero-body">
-        <video id="teaser" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/eccv24-egolifter-teaser-animate-v2-compress.mp4" type="video/mp4">
+  <section class="hero teaser">
+    <div class="container is-max-desktop is-full-width">
+      <div class="columns is-centered">
+        <video id="teaser" autoplay muted playsinline height="100%">
+          <source src="./static/videos/safe-teaser.mp4" type="video/mp4">
         </video>
+      </div>
+      <div class="columns is-centered">
         <h2 class="subtitle has-text-centered">
-          <span class="coolname">EgoLifter</span> takes an egocentric video as input and lifts 2D instance segmentation results to 3D by contrastive learning. The results are 3D Gaussian models that can be decomposed into individual object instances by querying or clustering. 
+            We introduce the <b>multitask failure detection</b> problem for VLA models, and propose <b><span class="coolname">SAFE</span></b>, a failure detector that can detect failures for unseen tasks zero-shot and achieve state-of-the-art performance.
         </h2>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <section class="section">
     <div class="container is-max-desktop">
@@ -207,16 +209,18 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">VLA Latent Feature Space</h2>
+          <h2 class="title is-3">VLA Latent Feature Analysis</h2>
           <div class="content has-text-justified">
             <p>
-              We find that the <b>VLA's internal features capture high-level information about task success and failure that is general across different tasks</b>. As shown in the figure below, when a VLA is failing, even though from different tasks, the features fall in the same <i>failure zone</i>. This motivates <span class="coolname">SAFE</span>, an efficient multitask failure detector that is based on VLA internal features and can generalize to unseen tasks. 
+              We find that the <b>VLA's internal features capture high-level information about task success and failure, and such information is general across different tasks</b>. As shown in the figure below, when a VLA is failing, even though from different tasks, the features fall in the same <i>failure zone</i>. This motivates <span class="coolname">SAFE</span>, an efficient multitask failure detector that is based on VLA internal features and can generalize to unseen tasks. 
             </p>
             <p>
-              In the figure below, we visualize the 
+              In the figure below, we visualize the latent features of <a href="https://github.com/Physical-Intelligence/openpi">&pi;<sub>0</sub>-FAST</a> on the <a href="https://github.com/Lifelong-Robot-Learning/LIBERO">LIBERO-10</a> benchmark.
+              In (a), features from successful rollouts are shown in blue and those from failed ones are shown in blue-red color gradient. 
+              In (b), we visualizes the same set of t-SNE features, colored by task ID. 
+              In (c), we show two example rollouts over time and mark their corresponding projected features in (a) and (b).
             </p>
             <img src="./static/images/vla-feature.png" />
           </div>
@@ -228,7 +232,18 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="content">
-            <h2 class="title is-3">Experiments</h2>
+            <h2 class="title is-3">SAFE: Multitask Failure Detector for VLA Models</h2>
+            <div class="content has-text-justified">
+              <p>
+                Based on the above observation, we propose <span class="coolname">SAFE</span>, a failure detector that learns from VLA internal features and predicts a single scalar indicating the likelihood of task failure. 
+              </p>
+              <ul>
+                <li>Extract VLA internal features. 
+              </ul>
+              <img src="./static/images/safe-method.png" />
+            </div>
+
+            <!-- <h2 class="title is-3">Experiments</h2>
             <p>
               Egocentric videos capture frequent human-object interaction and thus contain a huge amount of dynamic motion with challenging occlusions. <span class="coolname">EgoLifter</span> is designed to provide useful scene understanding from egocentric data by extracting hundreds of different objects while being robust to sparse and rapid dynamics.
             </p>
@@ -256,7 +271,7 @@
               <video poster="" controls muted loop playsinline height="100%" width="75%">
                 <source src="static/videos/compare_gg_less-meal132-seen.mp4" type="video/mp4">
               </video>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -265,7 +280,7 @@
   </section>
 
 
-  <section class="section">
+  <!-- <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
@@ -324,7 +339,7 @@
       </div>
 
     </div>
-  </section>
+  </section> -->
 
 
   <!-- <section class="section" id="concurrent work">
@@ -369,11 +384,11 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{gu2024egolifter,
+      <pre><code>@article{gu2025safe,
   author    = {Gu, Qiao and Lv, Zhaoyang and Frost, Duncan and Green, Simon and Straub, Julian and Sweeney, Chris},
   title     = {SAFE: Scalable Failure Estimation for Vision-Language-Action Models},
-  journal   = {arXiv preprint arXiv:2403.18118},
-  year      = {2024},
+  journal   = {Preprint},
+  year      = {2025},
 } </code></pre>
     </div>
   </section>
