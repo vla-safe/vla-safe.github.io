@@ -216,12 +216,12 @@
             <p>
               We find that the <b>VLA's internal features capture high-level information about task success and failure, and such information is general across different tasks</b>. As shown in the figure below, when a VLA is failing, even though from different tasks, the features fall in the same <i>failure zone</i>. This motivates <span class="coolname">SAFE</span>, an efficient multitask failure detector that is based on VLA internal features and can generalize to unseen tasks. 
             </p>
-            <p>
+            <!-- <p>
               In the figure below, we visualize the latent features of <a href="https://github.com/Physical-Intelligence/openpi">&pi;<sub>0</sub>-FAST</a> on the <a href="https://github.com/Lifelong-Robot-Learning/LIBERO">LIBERO-10</a> benchmark.
               In (a), features from successful rollouts are shown in blue and those from failed ones are shown in blue-red color gradient. 
               In (b), we visualizes the same set of t-SNE features, colored by task ID. 
               In (c), we show two example rollouts over time and mark their corresponding projected features in (a) and (b).
-            </p>
+            </p> -->
             <img src="./static/images/vla-feature.png" />
           </div>
           <br />
@@ -235,12 +235,43 @@
             <h2 class="title is-3">SAFE: Multitask Failure Detector for VLA Models</h2>
             <div class="content has-text-justified">
               <p>
-                Based on the above observation, we propose <span class="coolname">SAFE</span>, a failure detector that learns from VLA internal features and predicts a single scalar indicating the likelihood of task failure. 
+                Based on the above observation, we propose <span class="coolname">SAFE</span>, a failure detector that learns from VLA internal features and predicts a single scalar indicating the likelihood of task failure. <span class="coolname">SAFE</span> has 3 main components:
               </p>
               <ul>
-                <li>Extract VLA internal features. 
+                <li><b>Feature Extraction</b>: <span class="coolname">SAFE</span> extracts the latent feature from the last layer of a VLA model. In experiments, we ablate different ways of extracting features and aggregate them into a single feature vector.</li>
+                <li><b>Learning Failure Detector</b>: <span class="coolname">SAFE</span> sequentially processes the latent feature and predicts a failure score, using an MLP or an LSTM backbone. These models are of 1 or 2 layers to reduce overfitting and improve generalization.</li>
+                <li><b>Calibration and Deployment</b>: <span class="coolname">SAFE</span> determines a time-varying threshold using functional conformal prediction (CP) on a hold-out calibration set. If the predicted score exceeds the threshold during testing, <span class="coolname">SAFE</span> confidently detects a failure. </li>
               </ul>
               <img src="./static/images/safe-method.png" />
+            </div>
+
+            <h2 class="title is-3">Experiments and Results</h2>
+            <div class="content has-text-justified">
+              <p>
+                We evaluate the following diverse baselines. All the baselines use the same conformal prediction framework as <span class="coolname">SAFE</span> to determine the time-varying threshold.
+              </p>
+              <ul>
+                <li><b>Token Uncertainty</b>: Failure scores are computed based on token-wise uncertainty (probability and entropy). </li>
+                <li><b>Embedding Distribution</b>: Failure scores are computed based on the embedding distances to the calibration distribution. </li>
+                <li><b>Sample Consistency</b>: Multiple actions are sampled and failure scores are the inconsistency among the samples. </li>
+                <li><b>Action Consistency</b>: We adopt <a href="https://arxiv.org/abs/2410.04640">STAC scores</a> and also STAC-single that only uses a single sample per timestep. </li>
+              </ul>
+              <p>
+                We conduct experiments on <a href="https://github.com/openvla/openvla">OpenVLA</a>, <a href="https://github.com/Physical-Intelligence/openpi">&pi;<sub>0</sub> and &pi;<sub>0</sub>-FAST</a> VLA models on <a href="https://github.com/Lifelong-Robot-Learning/LIBERO">LIBERO</a>, <a href="https://github.com/simpler-env/SimplerEnv">SimplerEnv</a> benchmarks and a real-world Franka robot. 
+              </p>
+            </div>
+
+            <h3 class="is-3">How well do failure detectors distinguish failures from successes?</h3>
+            <div class="content has-text-justified">
+              <p>
+                Following the LLM uncertainty quantification literature, we report the ROC curve (ROC-AUC) metrics in the following figure, which are computed based on the max predicted failure score in each rollout. ROC-AUC averages the performance over all possible thresholds, which reflects the overall failure detection performance regardless of threshold selection. 
+              </p>
+              <img src="./static/images/safe-results-roc.png" />
+            </div>
+
+            <h3 class="is-3">How do detection accuracy and detection time trade off using functional CP?</h3>
+            <div class="content has-text-justified">
+              <img src="./static/images/safe-acc-tdet.png" />
             </div>
 
             <!-- <h2 class="title is-3">Experiments</h2>
