@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="SAFE: Scalable Failure Estimation for Vision-Language-Action Models">
+  <meta name="description" content="SAFE: Multitask Failure Detection for Vision-Language-Action Models">
   <meta name="keywords"
     content="SAFE, Vision-Language-Action Model, VLA, Failure Detection, Failure Estimation, Robotics, AI">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAFE: Scalable Failure Estimation for Vision-Language-Action Models</title>
+  <title>SAFE: Multitask Failure Detection for Vision-Language-Action Models</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEBZD9Q5QS"></script>
@@ -81,7 +81,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-2 publication-title">SAFE: Scalable Failure Estimation for Vision-Language-Action Models</h1>
+            <h1 class="title is-2 publication-title">SAFE: Multitask Failure Detection for <br>Vision-Language-Action Models</h1>
             <h2 class="title is-6 publlication-title">In Submission</h2>
             <div class="is-size-6 publication-authors">
               <span class="author-block">
@@ -230,7 +230,7 @@
 
 
       <div class="columns is-centered">
-        <div class="column">
+        <div class="column is-full-width">
           <div class="content">
             <h2 class="title is-3">SAFE: Multitask Failure Detector for VLA Models</h2>
             <div class="content has-text-justified">
@@ -264,152 +264,178 @@
             <h3 class="is-3">How well do failure detectors distinguish failures from successes?</h3>
             <div class="content has-text-justified">
               <p>
-                Following the LLM uncertainty quantification literature, we report the ROC curve (ROC-AUC) metrics in the following figure, which are computed based on the max predicted failure score in each rollout. ROC-AUC averages the performance over all possible thresholds, which reflects the overall failure detection performance regardless of threshold selection. 
+                Following the LLM uncertainty quantification literature, we report the area under the ROC curve (ROC-AUC) metric in the following figure. 
+                ROC-AUC results are computed based on the max predicted failure score in each rollout. 
+                This metric averages the performance over all possible thresholds, reflecting the overall failure detection performance regardless of threshold selection. 
               </p>
               <img src="./static/images/safe-results-roc.png" />
             </div>
 
             <h3 class="is-3">How do detection accuracy and detection time trade off using functional CP?</h3>
             <div class="content has-text-justified">
+              <p>
+                By varying the significance level &alpha; used in functional conformal prediction (CP), we can control the conservativeness of failure detection, which gives a trade-off between detection accuracy and detection time.
+                In the following figure, we plot the balanced accuracy ((TPR + TNR)/2) against the average detection time for different &alpha; values.
+              </p>
               <img src="./static/images/safe-acc-tdet.png" />
             </div>
 
-            <!-- <h2 class="title is-3">Experiments</h2>
-            <p>
-              Egocentric videos capture frequent human-object interaction and thus contain a huge amount of dynamic motion with challenging occlusions. <span class="coolname">EgoLifter</span> is designed to provide useful scene understanding from egocentric data by extracting hundreds of different objects while being robust to sparse and rapid dynamics.
-            </p>
-            <p>
-              To demonstrate this, we compare the following variants in our experiments: 
-            </p>
-            <ul>
-              <li><span class="coolname">EgoLifter</span>: Our proposed full method</li>
-              <li><span class="coolname">EgoLifter</span>-Static: a baseline with the transient prediction network disabled. A vanilla static 3DGS is learned to reconstruct the scene. </li>
-              <li><span class="coolname">EgoLifter</span>-Dynamic: a baseline using a dynamic variant of 3DGS, instead of the transient prediction network to handle the dynamics in the scene. </li>
-              <li><a href="https://arxiv.org/abs/2312.00732">Gaussian Grouping</a>: a concurrent work that also learns instance features in 3DGS. However, Gaussian Grouping uses a video tracker to solve instance identities rather than contrastive learning. </li>
-            </ul>
-            <p>
-              Here are the qualitative results of <span class="coolname">EgoLifter</span> on the <a href="https://www.projectaria.com/datasets/adt/">Aria Digital Twin</a> (ADT) dataset. Quantitative evaluation results and more analysis can be found in the paper. Note that baseline puts ghostly floaters on the region of transient objects, but <span class="coolname">EgoLifter</span> filters them out and gives a cleaner reconstruction of both RGB images and feature maps. 
-            </p>
-            <div class="qual-video-adt">
-              <video poster="" controls muted loop playsinline height="100%" width="100%">
-                <source src="static/videos/compare_3_faster-meal132-seen.mp4" type="video/mp4">
-              </video>
-            </div>
-            <p>
-              Here is the qualitative comparison with Gaussian Grouping. Note that <span class="coolname">EgoLifter</span> has a cleaner feature map probably because our contrastive loss helps learn more cohesive identity features than the classification loss used in Gaussian Grouping. 
-            </p>
-            <div class="qual-video-adt">
-              <video poster="" controls muted loop playsinline height="100%" width="75%">
-                <source src="static/videos/compare_gg_less-meal132-seen.mp4" type="video/mp4">
-              </video>
-            </div> -->
           </div>
         </div>
       </div>
 
     </div>
-  </section>
 
-
-  <!-- <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column">
           <div class="content">
-            <h2 class="title is-3">More Qualitative Results</h2>
+            <h3 class="is-3">Are the detected failures aligned with human intuition?</h3>
             <p>
-              Here are more qualitative results of <span class="coolname">EgoLifter</span> on the <a href="https://ego-exo4d-data.org/">Ego-Exo4D</a> dataset and <a href="https://www.projectaria.com/datasets/aea/">Aria Everyday Activities</a> dataset.
+              In the following, we show a few example successful and failed rollouts together with the failure scores predicted by <span class="coolname">SAFE</span>. The green shaded region indicates the failure detection threshold determined by functional conformal prediction. Video frames with red border mean the a failure alert has been raised at that time step.
             </p>
           </div>
         </div>
       </div>
       
       <div class="columns is-centered">
-
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column content">
-              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
-                <source src="static/videos/compare_path-egoexo-cmu_bike16-trim.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column content">
-              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
-                <source src="static/videos/compare_path-sfu_cooking025.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content">
-            <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
-              <source src="static/videos/compare_path-aea-loc2.mp4" type="video/mp4">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/openvla-libero-1-succ.mp4" type="video/mp4">
             </video>
-          </div>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
         </div>
-
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column content">
-              <video poster="" id="snoopy" controls muted loop playsinline height="100%" width="100%">
-                <source src="static/videos/compare_path-aea-loc4.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/openvla-libero-1-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: When the robot gets stuck while picking up alphabet soup, it raises a failure signal</p>
         </div>
-
       </div>
 
-    </div>
-  </section> -->
-
-
-  <!-- <section class="section" id="concurrent work">
-    <div class="container is-max-desktop content">
       <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Concurrent work</h2>
-
-          <div class="content has-text-justified">
-            <p>
-              Given the pace of AI research these days, it is extremely challenging to keep up with all of the work
-              around foundation models and open-set perception. We list below a few key approaches that we have come
-              across after finalizing the ConceptGraphs system. If we may have inadvertently missed out on key
-              concurrent work, please reach out to us over email (or better, open a pull request on <a
-                href="https://github.com/concept-graphs/concept-graphs.github.io">our GitHub page</a>).
-            </p>
-            <p>
-              <a href="https://openreview.net/forum?id=gVBvtRqU1_">OVIR-3D</a> is an open-vocabulary 3D instance-level
-              mapping system that reconstructs an objects from RGB-D images and known poses. Each object is additionally
-              assigned a CLIP embedding for text-query-based retrieval.
-            </p>
-            <p>
-              <a href="https://openmask3d.github.io/">OpenMask3D</a> performs 3D instance segmentation (on pointcloud
-              data) based on open-vocabulary queries (specified as text).
-            </p>
-            <p>
-              <a href="https://openreview.net/forum?id=cjEI5qXoT0">OVSG</a> reconstructs open-vocabulary 3D scene graphs
-              using OVIR-3D and a graph network encoder.
-            </p>
-            <p>
-              <a href="https://sayplan.github.io/">SayPlan</a> demonstrates an efficient planning mechanism using LLMs
-              and 3D Scene Graphs (assumed available).
-            </p>
-          </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/openvla-libero-2-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/openvla-libero-2-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot gets stuck in its initial state.</p>
         </div>
       </div>
 
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-1-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-1-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot knocks down the tomato sauce and fails grasping, subsequently exhibits dangerous behavior. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-2-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-2-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: When the robot attempts to place the bowl, it exhibits unexpected dangerous behavior. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-3-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0fast-libero-3-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot misses the insertion attempt and subsequently exhibits unstable behavior. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-libero-1-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-libero-1-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot gets stuck while attempting to grasp, triggering a failure signal. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-simpler-1-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span></p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-simpler-1-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot repeatedly fails to grasp the carrot. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-fast-real-1-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span>: Note that failure scores stop increasing after the robot finishes the task.</p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-fast-real-1-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot gets stuck while picking up the handle of the lid. </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-fast-real-2-succ.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="succ-text">Success</span>: Note that failure scores stop increasing after the robot finishes the task.</p>
+        </div>
+        <div class="column content">
+            <video poster="" id="snoopy" controls muted loop playsinline autoplay height="100%" width="100%">
+            <source src="static/videos/pi0-fast-real-2-fail.mp4" type="video/mp4">
+            </video>
+            <p class="has-text-centered"><span class="fail-text">Failure</span>: The robot repeatedly fails to grasp the carrot despite multiple attempts. </p>
+        </div>
+      </div>
+
+
     </div>
-  </section> -->
+  </section>
 
 
   <section class="section" id="BibTeX">
@@ -417,7 +443,7 @@
       <h2 class="title">BibTeX</h2>
       <pre><code>@article{gu2025safe,
   author    = {Gu, Qiao and Lv, Zhaoyang and Frost, Duncan and Green, Simon and Straub, Julian and Sweeney, Chris},
-  title     = {SAFE: Scalable Failure Estimation for Vision-Language-Action Models},
+  title     = {SAFE: Multitask Failure Detection for Vision-Language-Action Models},
   journal   = {Preprint},
   year      = {2025},
 } </code></pre>
