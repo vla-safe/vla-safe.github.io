@@ -5,6 +5,12 @@ This is the repository that contains source code for the [SAFE](https://vla-safe
 ## Bibtex
 
 ```
+@article{gu2025safe,
+  author    = {Gu, Qiao and Ju, Yuanliang and Sun, Shengxiang and Gilitschenski, Igor and Nishimura, Haruki and Itkina, Masha and Shkurti, Florian},
+  title     = {SAFE: Multitask Failure Detection for Vision-Language-Action Models},
+  journal   = {arXiv preprint arXiv:2506.09937},
+  year      = {2025},
+} 
 ```
 
 # Development
