@@ -211,7 +211,7 @@
               In (b), we visualizes the same set of t-SNE features, colored by task ID. 
               In (c), we show two example rollouts over time and mark their corresponding projected features in (a) and (b).
             </p> -->
-            <img src="./static/images/safe-figure-feature-v5.png" />
+            <img src="static/images/vla-feature.png" />
           </div>
           <br />
         </div>
@@ -241,7 +241,7 @@
               <li><b>Learning Failure Detector</b>: <span class="coolname">SAFE</span> sequentially processes the latent feature and predicts a failure score, using an MLP or an LSTM backbone. These models are of 1 or 2 layers to reduce overfitting and improve generalization.</li>
               <li><b>Calibration and Deployment</b>: <span class="coolname">SAFE</span> determines a time-varying threshold using functional conformal prediction (CP) on a hold-out calibration set. If the predicted score exceeds the threshold during testing, <span class="coolname">SAFE</span> confidently detects a failure. </li>
             </ul>
-            <img src="./static/images/safe-method.png" />
+            <img src="static/images/safe-pipeline-v2.jpg" />
           </div>
         </div>
       </div>
